@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Notification Menu Component</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script   src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"   integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="   crossorigin="anonymous"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ 
+ <style>
+ 
+/* NOTIFICATION COMPONENT */
+body, html {
+	height:100%;
+	overflow:hidden;
+}
+
+
+.container {
+	height:100%;
+	padding:10px;
+	position: relative;
+	z-index: 2000;
+	width:100%;
+}
+
+
+/* 
+.notify-container::before {
+	content: "\e068";
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 50px;
+    right: -10px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;	
+}
+ */
+
+.notify-container {
+	position: absolute;
+    bottom: 30%;
+    right: 50%;
+    max-height: 100px;
+    width: 100px;
+    padding: 20px;
+    cursor: move;
+}
+
+.notify-container a {
+	text-decoration: none;
+	color:#fff;
+}
+
+.notify {
+	height:50px;
+	width:50px;
+	border-radius: 50%;
+	background-color:#0099cc;
+	position: relative;
+    bottom: 0px;
+    right: 0px;
+    cursor:pointer;
+    -webkit-box-shadow: 3px 3px 8px -1px rgba(138,138,138,1);
+	-moz-box-shadow: 3px 3px 8px -1px rgba(138,138,138,1);
+	box-shadow: 3px 3px 8px -1px rgba(138,138,138,1);
+	color:#e6e6e6;
+	transition-duration: 0.6s;
+	display:block;
+}
+.notify:hover {
+	background-color:#007399;	
+	color:#fafafa;
+}
+
+.sub.notify::after { 
+	content: ".";
+    width: 10px;
+    top: 30px;
+    left: 15px;
+    position: absolute;
+    color: rgba(104, 102, 102, 0.75);
+    height: 10px;
+    border-radius: 50%;
+}
+
+.sub.notify {
+	right: -5px;
+    height: 40px;
+    width: 40px;
+    transition-duration: 0.5s;
+    opacity: 0;
+    outline: none;
+}
+.sub.notify:hover {
+	color:#fafafa;
+}
+
+.notify.one {
+	background-color: #85adad;
+    bottom: 44px;
+    z-index: -1;
+}
+.notify.one:hover {
+	background-color:#5c8a8a;
+}
+
+.notify.two {
+	background-color: #40bf80;
+    bottom: 85px;
+    z-index: -2;
+}
+.notify.two:hover {
+	background-color:#2d8659;
+}
+
+.notify.three {
+	 background-color: #ff8080;
+    bottom: 125px;
+    z-index: -3;
+}
+.notify.three:hover {
+	background-color:#ff4d4d;
+}
+
+
+.info {
+	position: relative;
+    top: 35%;
+    left: 35%;
+}
+
+.bullhorn, .ok, .envelope {
+	position: absolute;
+    top: 33%;
+    left: 30%;
+}
+
+.notify-number {
+	height: 22px;
+    width: 22px;;
+    background-color: rgba(238, 36, 41, 0.84);
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 10px;
+    color: #fff;
+    padding:2px 3px;
+    position: absolute;
+    right: -16px;
+    top: -4px;
+    border: 2px solid rgba(238, 36, 41, 0.31);
+    -webkit-box-shadow: 1px 1px 5px -1px rgba(138,138,138,1);
+	-moz-box-shadow: 1px 1px 5px -1px rgba(138,138,138,1);
+	box-shadow: 1px 1px 5px -1px rgba(138,138,138,1);
+	font-weight: 200;
+}
+
+.sub  .notify-number {  
+	padding: 2px 6px;
+}
+
+.notify-text::before {
+	content: "";
+    position: absolute;
+    top: 5px;
+    left: -7px;
+    border-color: transparent #222222 transparent transparent;
+    border-style: solid;
+    border-width: 7px 7px 7px 0px;
+}
+
+.notify-text {
+	color: #F8F6F6;
+    font-size: 12px;
+    position: absolute;
+    left: 51px;
+    top: 9px;
+    text-align: center;
+    display: block;
+    white-space: nowrap;
+    border-radius: 6px;
+    background-color: #222;
+    padding: 3px 8px;
+    -webkit-box-shadow: 3px 3px 8px -1px rgba(138,138,138,1);
+    -moz-box-shadow: 3px 3px 8px -1px rgba(138,138,138,1);
+    box-shadow: 3px 3px 8px -1px rgba(138,138,138,1);
+    transition-duration: 0.5s;
+}
+
+.modal-content {
+	border-radius: 0px;
+}
+
+.modal-header {
+	text-align: center;
+	color:#fff;
+    background-color: #29a3a3;
+}
+
+.modal-header .close {
+	font-size: 30px;
+}
+
+.modal-dialog {
+	width:50%;
+	margin: 60px auto;
+}
+
+
+ </style>
+</head>
+<body>
+
+
+<div class="container">
+
+
+
+<div id="notification-container" class="notify-container ui-widget-content">
+	<a id="notification" class="notify visible">
+		<span class="info glyphicon glyphicon-bell"></span>
+		<span class="notify-number">10</span>
+	</a>
+
+	<a id="de-notification" class="notify">
+		<span class="info glyphicon glyphicon-remove"></span>
+	</a>
+
+	<a id="notification1" class="sub notify one" data-toggle="modal" href="#myModal">
+		<span class="bullhorn glyphicon glyphicon-bullhorn"></span>
+		<span class="notify-number">2</span>
+		<span class="notify-text">notifications</span>
+	</a>
+
+	<a id="notification2" class="sub notify two" data-toggle="modal" href="#myModal2">
+		<span class="envelope glyphicon glyphicon-send"></span>
+		<span class="notify-number">5</span>
+		<span class="notify-text">mails</span>
+	</a>
+	<a id="notification3" class="sub notify three" data-toggle="modal" href="#myModal3">
+		<span class="ok glyphicon glyphicon-ok"></span>
+		<span class="notify-number">3</span>
+		<span class="notify-text">to-do list</span>
+	</a>	
+</div>
+
+<!-- Modal bullhorn-->
+  <div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+	  <!-- Modal content-->
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <h4 class="modal-title">Notifications &nbsp;&nbsp;<span class="glyphicon glyphicon-bullhorn"></span></h4>
+		</div>
+		<div class="modal-body">
+		  <ul class="list-group">
+			<li class="list-group-item"><span class="badge">12</span> New</li>
+			<li class="list-group-item"><span class="badge">5</span> Deleted</li> 
+			<li class="list-group-item"><span class="badge">3</span> Warnings</li> 
+		  </ul>
+		</div>
+	  </div>
+
+	</div>
+  </div>
+
+<!-- Modal envelope-->
+  <div class="modal fade" id="myModal2" role="dialog">
+	<div class="modal-dialog">
+
+	  <!-- Modal content-->
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <h4 class="modal-title">Mails&nbsp;&nbsp;<span class="glyphicon glyphicon-send"></span></h4>
+		</div>
+		<ul class="list-group">
+			<li class="list-group-item"><span class="badge">12</span><a href="#">Inbox</a></li>
+			<li class="list-group-item"><span class="badge">5</span><a href="#">Drafts</a></li> 
+			<li class="list-group-item"><span class="badge">3</span><a href="#">Sent Items</a></li> 
+		</ul>
+	  </div>
+
+	</div>
+  </div>
+
+<!-- Modal ok-->
+  <div class="modal fade" id="myModal3" role="dialog">
+<div class="modal-dialog">
+
+  <!-- Modal content-->
+  <div class="modal-content">
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal">&times;</button>
+	  <h4 class="modal-title">TO-DO List&nbsp;&nbsp;<span class="glyphicon glyphicon-ok"></span></h4>
+	</div>
+	<div class="modal-body">
+	  <ul class="list-group">
+	  <li class="list-group-item">Work 1</li>
+	  <li class="list-group-item">Work 2</li>
+	  <li class="list-group-item">Work 3</li>
+	</ul>  
+	</div>
+  </div>
+
+</div>
+</div>	
+
+</div>
+
+		  
+<script>
+$(document).ready(function(){
+
+	$('[data-toggle="popover"]').popover(); 
+	$('[data-toggle="tooltip"]').tooltip(); 
+	$('.compliance-icon').tooltip();
+	$( ".notify-text" ).css({"opacity":"0"});
+	$("#de-notification").css({"display":"none", scroll: false});
+	
+	
+	
+	$("#notification").click(function(e){
+		$("#notification1").css({
+		"opacity":"1",
+		"-webkit-transform":"translate(0px,-55px)",
+		"-ms-transform":"translate(0px,-55px)",
+		"transform":"translate(0px,-55px)"
+		});
+		  
+		$("#notification2").css({
+		"opacity":"1",
+		"-webkit-transform":"translate(0px, -105px)",
+		"-ms-transform":"translate(0px, -105px)",
+		"transform":"translate(0px, -105px)"
+		});
+		  
+		$("#notification3").css({
+		"opacity":"1",
+		"-webkit-transform":"translate(0px, -155px)",
+		"-ms-transform":"translate(0px, -155px)",
+		"transform":"translate(0px, -155px)"
+		});
+		
+		$(this).hide();
+		$("#de-notification").css({"display":"block"});
+	});
+	
+	$("#de-notification").click(function(e){
+		$("#notification1,#notification2,#notification3").css({
+		"opacity":"0",
+		"-webkit-transform":"translate(0px,0px)",
+		"-ms-transform":"translate(0px,0px)",
+		"transform":"translate(0px,0px)"
+		});
+		
+		$(this).hide();
+		$("#notification").css({"display":"block"});
+	})
+	
+	
+	$(".sub").mouseenter(function(){
+		$(this).children().css({'opacity' : '1'});
+	});
+	
+	
+	$(".sub").mouseleave(function(){
+		$(this).children(".notify-text").css({'opacity' : '0'});
+	});
+	
+	$("#notification-container").draggable({ containment: 'parent'});
+})
+  
+</script>
+
+	  
+</body>
+</html>
